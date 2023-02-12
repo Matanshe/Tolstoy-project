@@ -18,11 +18,10 @@ def upload_image():
 @app.route('/api/images', methods=['GET'])
 def get_images():
     def get_images():
-        # Connect to the database
         conn = sqlite3.connect('images.db')
         c = conn.cursor()
 
-        # Retrieve the list of images from the database
+        logger.info("Getting images from DB")
         c.execute("SELECT name, date, description, path FROM images")
         images = c.fetchall()
         conn.close()
