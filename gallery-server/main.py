@@ -26,7 +26,6 @@ def get_images():
         images = c.fetchall()
         conn.close()
 
-        # Return the list of images as JSON data
         return jsonify({'images': images})
 
 
