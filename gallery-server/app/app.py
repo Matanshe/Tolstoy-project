@@ -7,17 +7,15 @@ import time
 
 from PIL import Image
 from flask import Flask, jsonify, request
-from flask_cors import CORS
 
 app = Flask(__name__, static_folder='images')
-CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}})
 
 logger = logging.getLogger('main')
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s', stream=sys.stdout)
 
 
 def create_images_table():
-    conn = sqlite3.connect('images_db.db')
+    conn = sqlite3.connect('../images_db.db')
 
     cur = conn.cursor()
     logger.info("Creating images table in DB if not exist")
@@ -58,7 +56,9 @@ def upload_image():
     date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     description = request.form.get('description', '')
 
-    image_path = f"./gallery-server/images/{image_file.filename}"
+    # image_path = f"./gallery-server/images/{image_file.filename}"
+    image_path = f"../images/{image_file.filename}"
+    logger.debug(f"working dir: {os.getcwd()}")
     image_file.save(image_path)
 
     base_path = os.path.split(image_path)[0]
@@ -66,7 +66,7 @@ def upload_image():
     thumb_path = os.path.join(base_path, "thumbs", file_name)
 
     generate_thumbnail(image_path, thumb_path)
-    conn = sqlite3.connect('images_db.db')
+    conn = sqlite3.connect('../images_db.db')
     c = conn.cursor()
 
     c.execute("INSERT INTO images (name, date, description, image_path, thumb_path) VALUES (?,?,?,?,?)",
@@ -80,7 +80,7 @@ def upload_image():
 
 @app.route('/api/images', methods=['GET'])
 def get_images():
-    conn = sqlite3.connect('images_db.db')
+    conn = sqlite3.connect('../images_db.db')
     c = conn.cursor()
 
     logger.info("Getting images from DB")
