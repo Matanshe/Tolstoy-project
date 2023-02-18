@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {getAllImages} from "../../api/images";
 import "./ImageLibrary.css";
 
+const BASE_URL = "http://127.0.0.1:5000/"
+
 const ImageLibrary = ({ onImageSelect }) => {
   const [images, setImages] = useState([]);
 
@@ -19,13 +21,13 @@ const ImageLibrary = ({ onImageSelect }) => {
 
   return (
     <div className="image-library">
-      {images.map((image) => (
+      {Array.isArray(images) && images.map((image) => (
         <div
           key={image.image_path}
           className="image-thumbnail"
           onClick={() => handleImageClick(image)}
         >
-          <img src={image.thumb_path} alt={image.name} />
+          <img src={BASE_URL+image.thumb_path.replce("./gallery-server/", "")} alt={image.name} />
           <p>{image.name}</p>
           <p>{image.description}</p>
         </div>

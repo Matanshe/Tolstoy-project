@@ -46,6 +46,7 @@ def generate_thumbnail(image_path, thumb_path, size=(128, 128)):
 
 @app.route('/api/upload', methods=['POST'])
 def upload_image():
+    logger.debug(f"Got request form : {request.form.to_dict()} ---  {request.files.to_dict()}")
     image_file = request.files.get('file')
     if image_file is None:
         logger.error("No image file provided")

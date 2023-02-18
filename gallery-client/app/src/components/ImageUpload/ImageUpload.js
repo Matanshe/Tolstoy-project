@@ -6,6 +6,8 @@ const ImageUpload = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successState, setSuccess] = useState(false);
+
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -32,8 +34,15 @@ const ImageUpload = () => {
       setErrorMessage("Please select an image file");
       return;
     }
+    debugger;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("name", name);
+    formData.append("description", description);
+
     try {
-      const response = await uploadImage(file, name, description);
+      const response = await uploadImage(formData);
+      setSuccess(true)
       setFile(null);
       setName("");
       setDescription("");
@@ -73,6 +82,7 @@ const ImageUpload = () => {
           <button type="submit">Save</button>
         </div>
         {errorMessage && <div>{errorMessage}</div>}
+        {successState && <div>Uploaded successful</div>}
       </form>
     </div>
   );
