@@ -6,7 +6,7 @@ import sys
 import time
 
 from PIL import Image
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder='images')
@@ -102,20 +102,5 @@ def get_images():
     return jsonify({'images': images})
 
 
-@app.route('/images/<filename>')
-def get_image(filename):
-    logger.info(f"fetcing image {filename}")
-    # define the path to your image directory
-    image_dir = os.path.join(f"gallery-server", 'images')
-    return send_from_directory(image_dir, path=filename)
-
-
-@app.route('/images/thumbs/<filename>')
-def get_thumbs(filename):
-    # define the path to your image directory
-    image_dir = os.path.join(f"gallery-server", 'images/thumbs')
-    return send_from_directory(image_dir, filename)
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=5001)
