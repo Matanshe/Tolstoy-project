@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ImageUploader from "./components/ImageUpload";
-import ImageLibrary from "./components/ImageLibrary";
-import ImageViewer from "./components/ImageViewer";
+import ImageUploader from "./components/ImageUpload/ImageUpload";
+import ImageLibrary from "./components/ImageLibrary/ImageLibrary";
+import ImageViewer from "./components/ImageViewer/ImageViewer";
 import "./App.css";
 
 const App = () => {
