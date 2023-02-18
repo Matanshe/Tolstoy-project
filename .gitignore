@@ -1,2 +1,13 @@
 /gallery-server/venv/
 /.idea/
+
+gallery-client/node_modules
+
+
+*.DS_Store
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+npm-debug.log*

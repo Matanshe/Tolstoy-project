@@ -1,0 +1,15 @@
+/* .image-library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .image-library__image {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .image-library__image:hover {
+    transform: scale(1.1);
+  } */
+  
