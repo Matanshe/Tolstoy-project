@@ -3,9 +3,10 @@ import os
 import time
 
 from flask import Flask, jsonify, request
+
 from config import Config
 from db import Database
-from utils import generate_and_save_thumbnail, get_thumb_path
+from utils.image_utils import generate_and_save_thumbnail, get_thumb_path
 
 
 app = Flask(__name__, static_folder='images')
@@ -40,13 +41,6 @@ def upload_image():
     app.logger.info(f"Image uploaded successfully: name={name}, date={date}, description={description}")
 
     return jsonify({'message': 'Image uploaded successfully'}, 200)
-
-
-def get_thumb_path(image_path):
-    base_path = os.path.split(image_path)[0]
-    file_name = os.path.split(image_path)[1]
-    thumb_path = os.path.join(base_path, "thumbs", file_name)
-    return thumb_path
 
 
 @app.route('/api/delete', methods=['DELETE'])
