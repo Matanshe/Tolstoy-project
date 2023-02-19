@@ -9,8 +9,8 @@ const ImageLibrary = ({ onImageSelect }) => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const images = await getAllImages();
-      setImages(images);
+      const images_resp = await getAllImages();
+      setImages(images_resp.images);
     };
     fetchImages();
   }, []);
@@ -23,11 +23,11 @@ const ImageLibrary = ({ onImageSelect }) => {
     <div className="image-library">
       {Array.isArray(images) && images.map((image) => (
         <div
-          key={image.image_path}
+          key={image.id}
           className="image-thumbnail"
           onClick={() => handleImageClick(image)}
         >
-          <img src={BASE_URL+image.thumb_path.replce("./gallery-server/", "")} alt={image.name} />
+          <img src={BASE_URL+image.thumb_path.replace("./gallery-server/", "")} alt={image.name} />
           <p>{image.name}</p>
           <p>{image.description}</p>
         </div>

@@ -24,6 +24,15 @@ const apiClient = {
       throw new Error(`Request failed: ${error.message}`);
     }
   },
+
+  delete: async (path ,id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}${path}?id=${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(`Request failed: ${error.message}`);
+    }
+  },
 };
 
 export default apiClient;

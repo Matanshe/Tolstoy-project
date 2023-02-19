@@ -79,24 +79,38 @@ def upload_image():
     return jsonify({'message': 'Image uploaded successfully'}, 200)
 
 
+@app.route('/api/delete', methods=['DELETE'])
+def delete_image():
+    image_id = request.args.get('id')
+    conn = sqlite3.connect('../images_db.db')
+    c = conn.cursor()
+    c.execute("DELETE from images WHERE id=?", image_id)
+    conn.commit()
+    conn.close()
+    # need to implement - delete the image file itself
+    return jsonify({'message': 'Image deleted successfully'}, 200)
+
+
+
 @app.route('/api/images', methods=['GET'])
 def get_images():
     conn = sqlite3.connect('../images_db.db')
     c = conn.cursor()
 
     logger.info("Getting images from DB")
-    c.execute("SELECT name, date, description, image_path, thumb_path  FROM images")
+    c.execute("SELECT id, name, date, description, image_path, thumb_path  FROM images")
     rows = c.fetchall()
     conn.close()
 
     images = []
     for row in rows:
         image = {
-            'name': row[0],
-            'date': row[1],
-            'description': row[2],
-            'image_path': row[3],
-            'thumb_path': row[4]
+            'id': row[0],
+            'name': row[1],
+            'date': row[2],
+            'description': row[3],
+            'image_path': row[4],
+            'thumb_path': row[5]
         }
         images.append(image)
 

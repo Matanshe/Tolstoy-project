@@ -16,6 +16,8 @@ services:
         dockerfile: Dockerfile_server
     ports:
       - "5001:5001"
+    volumes:
+      - images-volume:/images/
 
 
   nginx:
@@ -26,7 +28,10 @@ services:
       - "80:80"
     volumes:
       - ./gallery-server/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./gallery-server/images/:/usr/share/nginx/html/images
+      - images-volume:/usr/share/nginx/html/images
     depends_on:
       - gallery-client
       - gallery-server
+
+volumes:
+  images-volume:
