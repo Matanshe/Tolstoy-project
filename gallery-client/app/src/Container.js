@@ -28,6 +28,8 @@ const Container = () => {
   };
 
   const handleImageClose = () => {
+    setErrorMessage("");
+    setSuccessMessage("");
     setSelectedImage(null);
   };
 
