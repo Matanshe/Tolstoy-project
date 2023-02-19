@@ -84,7 +84,7 @@ def delete_image():
     image_id = request.args.get('id')
     conn = sqlite3.connect('../images_db.db')
     c = conn.cursor()
-    c.execute("DELETE from images WHERE id=?", image_id)
+    c.execute("DELETE from images WHERE id=?", (image_id,))
     conn.commit()
     conn.close()
     # need to implement - delete the image file itself
