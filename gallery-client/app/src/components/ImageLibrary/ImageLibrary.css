@@ -1,15 +1,16 @@
-/* .image-library {
+.image-library {
     display: grid;
+    padding-top: 50px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 20px;
   }
   
-  .image-library__image {
+  .image-thumbnail {
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
   }
   
-  .image-library__image:hover {
+  .image-thumbnail:hover {
     transform: scale(1.1);
-  } */
+  }
   

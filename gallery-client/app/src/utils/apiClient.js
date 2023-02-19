@@ -25,7 +25,7 @@ const apiClient = {
     }
   },
 
-  delete: async (path ,id) => {
+  delete: async (path, id) => {
     try {
       const response = await axios.delete(`${BASE_URL}${path}?id=${id}`);
       return response.data;

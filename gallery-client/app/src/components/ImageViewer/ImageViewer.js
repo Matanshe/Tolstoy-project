@@ -1,40 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
-import {deleteImage} from "../../api/delete";
 
 import "./ImageViewer.css";
 
 const BASE_URL = "http://127.0.0.1:5000/"
 
-const ImageViewer = ({ image, onClose }) => {
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const HandleDeleteImage = async (image) => {
-    debugger;
-    try{
-      const delete_resp = await deleteImage(image.id);
-      onClose()
-    } catch (error) {
-      console.log(error);
-      setErrorMessage("An error occurred. Please try again later.");
-    }
-  }     
-  
-
+const ImageViewer = (props) => {
+  const image = props.image
   return (
     <Modal
       isOpen={!!image}
-      onRequestClose={onClose}
+      onRequestClose={props.onClose}
       contentLabel="Image Viewer"
     >
       {image && (
         <div>
-          <button onClick={onClose}>Close</button>
-          <button onClick={() => HandleDeleteImage(image)}>delete</button>
-          <img src={BASE_URL+image.image_path.replace("./gallery-server/", "")} alt={image.name} />
-          <p>{image.name}</p>
-          <p>{image.description}</p>
-          {errorMessage && <div>{errorMessage}</div>}
+          <img src={BASE_URL + image.image_path.replace("./gallery-server/", "")} alt={image.name} />
+          <p>
+            <b>{image.name} &nbsp; </b> 
+            <span>{image.description}</span>
+          </p>
+          <button onClick={props.onClose}>Close</button>
+          <button onClick={() => props.HandleDeleteImage(image)}>delete</button>
         </div>
       )}
     </Modal>
