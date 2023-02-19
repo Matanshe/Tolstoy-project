@@ -8,7 +8,6 @@ from config import Config
 from db import Database
 from utils.image_utils import generate_and_save_thumbnail, get_thumb_path
 
-
 app = Flask(__name__, static_folder='images')
 app.config.from_object(Config)
 Config.init_app(app)
